@@ -1,0 +1,30 @@
+.header-footer {
+    background-color: var(--dark);
+    height: 50px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.header-footer-container {
+    height: 50px;
+}
+
+.link {
+    color: var(--light);
+    font-size: 1.3rem;
+    text-decoration: none;
+    box-sizing: border-box;
+    margin: 0px 10px;
+    text-transform: uppercase;
+}
+
+.link:hover {
+    color: var(--primary);
+}
+
+@media screen and (max-width:756px) and (min-width:300px) {
+    .header-footer {
+        display: none;
+    }
+}
