@@ -1,70 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import HeaderFooter from '../components/home/header/HeaderFooter';
-import HeaderNav from '../components/home/header/HeaderNav';
-import HeaderSearch from '../components/home/header/HeaderSearch';
-import Advertise from '../components/home/Advertise/Advertise';
-import Main from '../components/home/Products/Main';
+import React, { useState, useEffect } from "react";
+import HeaderFooter from "../components/header/HeaderFooter";
+import HeaderNav from "../components/header/HeaderNav";
+import HeaderSearch from "../components/header/HeaderSearch";
+import Advertise from "../components/Advertise/Advertise";
+import Main from "../components/Products/Main";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from '../firebaseConfig';
-import { useDispatch, useSelector } from 'react-redux';
-import { productSliceAction } from '../slices/productSlice';
-import Footer from '../components/home/Footer/Footer';
-
-
+import { db } from "../firebaseConfig";
+import { useDispatch, useSelector } from "react-redux";
+import { productSliceAction } from "../slices/productSlice";
+import Footer from "../components/Footer/Footer";
 
 const Home = () => {
+  const dispatch = useDispatch();
 
+  const loading = useSelector((state) => state.products.loading);
 
-    const dispatch = useDispatch();
+  const getProductsFromFirebase = async () => {
+    dispatch(productSliceAction.setLoadingOn());
 
-    const loading = useSelector((state) => state.products.loading)
+    const docRef = collection(db, "products");
+    const docSnap = await getDocs(docRef);
 
-    const getProductsFromFirebase = async () => {
+    let firestoreArrayData = [];
 
-        dispatch(productSliceAction.setLoadingOn());
+    docSnap.docs.map((doc) => {
+      firestoreArrayData.push({ ...doc.data(), id: doc.id });
+    });
 
-        const docRef = collection(db, 'products');
-        const docSnap = await getDocs(docRef);
+    dispatch(productSliceAction.setProductsOnLoad(firestoreArrayData));
 
-        let firestoreArrayData = []
+    dispatch(productSliceAction.setLoadingOff());
+  };
 
-        docSnap.docs.map((doc) => {
-            firestoreArrayData.push({ ...doc.data(), id: doc.id })
-        })
+  useEffect(() => {
+    getProductsFromFirebase();
+  }, []);
 
-        dispatch(productSliceAction.setProductsOnLoad(firestoreArrayData))
+  return (
+    <>
+      {/* Header */}
+      <HeaderNav />
+      <HeaderSearch />
+      <HeaderFooter />
 
-        dispatch(productSliceAction.setLoadingOff());
-    }
+      {/* Advertise */}
+      <Advertise />
 
-    console.log("h");
+      {/* Main Products */}
+      {loading && <p>Loading...</p>}
+      {!loading && <Main />}
 
-    useEffect(() => {
-        getProductsFromFirebase();
-    }, [])
-
-
-    return (
-        <>
-            {/* Header */}
-            <HeaderNav />
-            <HeaderSearch />
-            <HeaderFooter />
-
-            {/* Advertise */}
-            <Advertise />
-
-            {/* Main Products */}
-            {
-                loading && <p>Loading...</p>
-            }
-            {
-                !loading && <Main />
-            }
-
-            <Footer />
-        </>
-    );
-}
+      <Footer />
+    </>
+  );
+};
 
 export default Home;

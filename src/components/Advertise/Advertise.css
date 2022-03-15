@@ -1,0 +1,54 @@
+.advertise-container {
+  height: 500px;
+  background: url("../../../public/wallpaper.jfif");
+  background-size: 100% 100%;
+  opacity: 0.6;
+}
+
+.advertise-links {
+  height: 500px;
+  margin: 30px 0px !important;
+}
+
+.men-bg {
+  height: 500px;
+  background: url("../../../public/men.jpg");
+  background-size: 100% 100%;
+  padding: 0px !important;
+  border-radius: 10px;
+}
+
+.women-bg {
+  height: 500px;
+  background: url("../../../public/women.jpg");
+  background-size: 100% 100%;
+  padding: 0px !important;
+  border-radius: 10px;
+}
+
+.watch-bg {
+  height: 250px;
+  background: url("../../../public/watch.jpg");
+  background-size: 100% 100%;
+  padding: 0px !important;
+  border-radius: 10px;
+}
+
+.shoes-bg {
+  height: 250px;
+  background: url("../../../public/shoes.jpg");
+  background-size: 100% 100%;
+  padding: 0px !important;
+  border-radius: 10px;
+}
+
+.hover-bg:hover {
+  opacity: 0.6;
+  box-shadow: 5px 5px 10px 0px var(--dark);
+}
+
+@media screen and (max-width: 756px) and (min-width: 300px) {
+  .advertise-links {
+    height: 100%;
+  }
+}

@@ -1,0 +1,87 @@
+.link2 {
+  color: var(--dark) !important;
+  font-size: 1.4rem;
+  text-decoration: none;
+  box-sizing: border-box;
+  margin: 0px 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.link2:hover {
+  color: var(--primary) !important;
+}
+
+.hamburg-icon {
+  background-color: var(--dark) !important;
+  height: 30px;
+  width: 30px;
+}
+
+.hamburg-icon > i {
+  font-size: 1.5rem;
+}
+
+.sidebar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sidebar-close {
+  margin: 20px 0px;
+}
+
+.sidebar-close > button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  outline: none;
+  background-color: var(--light);
+}
+
+.sidebar-close > button > i {
+  font-size: 2rem;
+  color: var(--dark);
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.sidebar-menu > h1 {
+  border-bottom: 2px solid var(--dark);
+  margin: 20px 0px;
+}
+
+.sidebar-categories {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.sidebar-categories > h1 {
+  border-bottom: 2px solid var(--dark);
+  margin: 20px 0px;
+}
+
+.sidebar-account {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.sidebar-account > h1 {
+  border-bottom: 2px solid var(--dark);
+  margin: 20px 0px;
+}
