@@ -124,7 +124,7 @@ const Login = () => {
             md={6}
             className="d-flex flex-column justify-content-center align-items-center auth-left p-5"
           >
-            <img src="./monitoring.png" alt="signup" className="auth-img" />
+            <img src="./login.png" alt="signup" className="auth-img" />
             <NavLink to="/signup" className="auth-link">
               Create an account
             </NavLink>

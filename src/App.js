@@ -13,6 +13,7 @@ import Shoes from "./pages/Shoes";
 import ShoppingCart from "./pages/ShoppingCart";
 import Watch from "./pages/Watch";
 import Women from "./pages/Women";
+import YourOrders from "./pages/YourOrders";
 import { authSliceAction } from "./slices/AuthSlice";
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/checkout" element={<CheckOut />} />
+        <Route path="yourorder" element={<YourOrders />} />
       </Routes>
     </>
   );

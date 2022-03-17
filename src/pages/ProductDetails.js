@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Col, Container, Row, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../components/Footer/Footer";
@@ -22,9 +22,13 @@ function ProductDetails() {
   const [reviewItems, setReviewItems] = useState([]);
   const [show, setShow] = useState(true);
 
+  const [ratingValue, setRatingValue] = React.useState(0);
+
   const product = useSelector((state) => state.products.singleProduct);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+
+  const commentRef = useRef();
 
   const addProduct = () => {
     if (selectedColor && selectedColor) {
@@ -75,7 +79,8 @@ function ProductDetails() {
   const addReview = async () => {
     let obj = {
       username: user.displayName,
-      comment: "excellent product",
+      comment: commentRef.current.value,
+      ratings: ratingValue,
       date: new Date().toString().slice(0, 15),
     };
 
@@ -83,6 +88,9 @@ function ProductDetails() {
     await addDoc(docRef, obj);
 
     fetchReviews();
+
+    setRatingValue(0);
+    commentRef.current.value = "";
   };
 
   useEffect(() => {
@@ -178,7 +186,10 @@ function ProductDetails() {
               {user && (
                 <div>
                   <h3 className="mb-3">Add Review</h3>
-                  <textarea placeholder="Comment here"></textarea>
+                  <textarea
+                    placeholder="Comment here"
+                    ref={commentRef}
+                  ></textarea>
                   <Row className="align-items-center">
                     <Col md={1}>
                       <h4>Ratings</h4>
@@ -186,9 +197,12 @@ function ProductDetails() {
                     <Col md={4}>
                       <Rating
                         name="half-rating"
-                        defaultValue={0}
+                        value={ratingValue}
                         precision={1}
                         className="ratings"
+                        onChange={(event, newValue) => {
+                          setRatingValue(newValue);
+                        }}
                       />
                     </Col>
                   </Row>

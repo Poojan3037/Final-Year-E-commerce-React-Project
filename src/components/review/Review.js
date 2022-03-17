@@ -5,7 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import Rating from "@mui/material/Rating";
 
 const Review = (props) => {
-  const { id, username, date, comment } = props.item;
+  const { id, username, date, comment, ratings } = props.item;
   return (
     <>
       <Card className="my-5 bg-light">
@@ -16,8 +16,7 @@ const Review = (props) => {
           </div>
           <Rating
             name="half-rating"
-            defaultValue={4}
-            precision={0.5}
+            defaultValue={parseInt(ratings)}
             className="review-ratings mt-3"
             readOnly
           />

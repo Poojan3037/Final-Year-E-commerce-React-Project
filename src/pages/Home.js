@@ -9,6 +9,7 @@ import { db } from "../firebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { productSliceAction } from "../slices/productSlice";
 import Footer from "../components/Footer/Footer";
+import Loading from "../components/Loading/Loading";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const Home = () => {
       <Advertise />
 
       {/* Main Products */}
-      {loading && <p>Loading...</p>}
+      {loading && <Loading />}
       {!loading && <Main />}
 
       <Footer />

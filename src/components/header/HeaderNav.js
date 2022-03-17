@@ -36,14 +36,15 @@ function HeaderNav() {
               <NavLink to="/" className="link">
                 contact us
               </NavLink>
-              <NavLink to="/" className="link">
-                blog
+              <NavLink to="/yourorder" className="link">
+                Your Orders
               </NavLink>
             </Col>
             <Col md={6} sm={12} className="text-md-end text-sm-center">
               <NavLink to="/" className="link">
                 {user ? `Hello , ${user.displayName}` : `Hello,Guest`}
               </NavLink>
+
               <NavLink to="/shoppingCart" className="link">
                 <i className="bi bi-cart3 cart-icon"></i> Shopping cart (
                 {cart.length})

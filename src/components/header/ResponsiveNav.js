@@ -58,8 +58,8 @@ function OffCanvasExample({ name, ...props }) {
               <NavLink to="/" className="link2">
                 contact us
               </NavLink>
-              <NavLink to="/" className="link2">
-                blog
+              <NavLink to="/yourorder" className="link2">
+                Your Orders
               </NavLink>
             </div>
             <div className="sidebar-categories">

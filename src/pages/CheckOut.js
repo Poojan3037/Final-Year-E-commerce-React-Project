@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import Complete from "../components/Complete/Complete";
 import Footer from "../components/Footer/Footer";
 import HeaderFooter from "../components/header/HeaderFooter";
 import HeaderNav from "../components/header/HeaderNav";
@@ -18,7 +19,7 @@ const CheckOut = () => {
 
   const dispatch = useDispatch();
 
-  const [show, setShow] = useState(true);
+  const [complete, setComplete] = useState(false);
 
   const [orderDetails, setOrderDetails] = useState({
     name: "",
@@ -29,11 +30,6 @@ const CheckOut = () => {
     pincode: "",
     state: "",
     city: "",
-  });
-
-  const [msg, setMsg] = useState({
-    status: "",
-    code: "",
   });
 
   const handleChange = (e) => {
@@ -47,6 +43,9 @@ const CheckOut = () => {
   };
 
   const handleCheckOut = async () => {
+    let date = new Date().toDateString();
+    let time = new Date().toTimeString();
+
     let obj = {
       name: orderDetails.name,
       number: orderDetails.number,
@@ -56,26 +55,23 @@ const CheckOut = () => {
       pincode: orderDetails.pincode,
       state: orderDetails.state,
       city: orderDetails.city,
-      userDetails: {
-        id: user.uid,
-        email: user.email,
-      },
+
+      userId: user.uid,
+      userEmail: user.email,
+
       orderList: cart,
       total: total,
-      orderDate: new Date().getTime(),
+      orderDate: date,
+      orderTime: time,
     };
 
     const docRef = collection(db, "orders");
     await addDoc(docRef, obj);
 
-    setMsg({
-      code: "Your order has been placed successfully",
-      status: "success",
-    });
-
     dispatch(cartSliceAction.clearCart());
     dispatch(cartSliceAction.updateTotal());
-    setShow(true);
+
+    setComplete(true);
   };
 
   return (
@@ -86,112 +82,105 @@ const CheckOut = () => {
           <HeaderSearch />
           <HeaderFooter />
 
-          <Container className="p-5">
-            {msg.code && show ? (
-              <Alert
-                variant={msg.status === "success" ? "success" : "danger"}
-                onClose={() => setShow(false)}
-                dismissible
-              >
-                <Alert.Heading className="text-center">
-                  {msg.code}
-                </Alert.Heading>
-              </Alert>
-            ) : (
-              <></>
-            )}
-            <Row className="justify-content-between">
-              <Col md={5}>
-                <h1 className=" mb-5 checkout-heading">Shipping Information</h1>
+          {complete ? (
+            <Complete />
+          ) : (
+            <Container className="p-5">
+              <Row className="justify-content-between">
+                <Col md={5}>
+                  <h1 className=" mb-5 checkout-heading">
+                    Shipping Information
+                  </h1>
 
-                <div className="text-center">
-                  <input
-                    className="shipping-input m-3"
-                    required
-                    type="text"
-                    placeholder="Full name"
-                    name="name"
-                    value={orderDetails.name}
-                    onChange={handleChange}
-                  ></input>
-                  <input
-                    className="shipping-input  m-3"
-                    required
-                    type="text"
-                    placeholder="Mobile number"
-                    name="number"
-                    value={orderDetails.number}
-                    onChange={handleChange}
-                  ></input>
+                  <div className="text-center">
+                    <input
+                      className="shipping-input m-3"
+                      required
+                      type="text"
+                      placeholder="Full name"
+                      name="name"
+                      value={orderDetails.name}
+                      onChange={handleChange}
+                    ></input>
+                    <input
+                      className="shipping-input  m-3"
+                      required
+                      type="text"
+                      placeholder="Mobile number"
+                      name="number"
+                      value={orderDetails.number}
+                      onChange={handleChange}
+                    ></input>
 
-                  <input
-                    className="shipping-input  m-3"
-                    required
-                    type="text"
-                    placeholder="Flat,House no.,Building,Company,Apartment"
-                    name="house"
-                    value={orderDetails.house}
-                    onChange={handleChange}
-                  ></input>
-                  <input
-                    className="shipping-input  m-3"
-                    required
-                    type="text"
-                    placeholder="Area,Colony,Street,Sector,Village"
-                    name="area"
-                    value={orderDetails.area}
-                    onChange={handleChange}
-                  ></input>
-                  <input
-                    className="shipping-input  m-3"
-                    required
-                    type="text"
-                    placeholder="Landmark e.g near Apollo Hospital"
-                    name="landmark"
-                    value={orderDetails.landmark}
-                    onChange={handleChange}
-                  ></input>
-                  <input
-                    className="shipping-input  m-3"
-                    required
-                    type="text"
-                    placeholder="Pincode"
-                    name="pincode"
-                    value={orderDetails.pincode}
-                    onChange={handleChange}
-                  ></input>
-                  <input
-                    className="shipping-input  m-3"
-                    required
-                    type="text"
-                    placeholder="Town/City"
-                    name="city"
-                    value={orderDetails.city}
-                    onChange={handleChange}
-                  ></input>
-                  <input
-                    className="shipping-input  m-3"
-                    required
-                    type="text"
-                    placeholder="State"
-                    name="state"
-                    value={orderDetails.state}
-                    onChange={handleChange}
-                  ></input>
-                </div>
-              </Col>
-              <Col md={5}>
-                <h1 className=" mb-5 checkout-heading">Payment Option</h1>
-                <div className="text-center">
-                  <h2 className="mb-5">Your Total : $ {total}</h2>
-                  <button className="checkout-btn " onClick={handleCheckOut}>
-                    Proceed with Cash on Delivery
-                  </button>
-                  <p>or</p>
-                </div>
-              </Col>
-            </Row>
-          </Container>
+                    <input
+                      className="shipping-input  m-3"
+                      required
+                      type="text"
+                      placeholder="Flat,House no.,Building,Company,Apartment"
+                      name="house"
+                      value={orderDetails.house}
+                      onChange={handleChange}
+                    ></input>
+                    <input
+                      className="shipping-input  m-3"
+                      required
+                      type="text"
+                      placeholder="Area,Colony,Street,Sector,Village"
+                      name="area"
+                      value={orderDetails.area}
+                      onChange={handleChange}
+                    ></input>
+                    <input
+                      className="shipping-input  m-3"
+                      required
+                      type="text"
+                      placeholder="Landmark e.g near Apollo Hospital"
+                      name="landmark"
+                      value={orderDetails.landmark}
+                      onChange={handleChange}
+                    ></input>
+                    <input
+                      className="shipping-input  m-3"
+                      required
+                      type="text"
+                      placeholder="Pincode"
+                      name="pincode"
+                      value={orderDetails.pincode}
+                      onChange={handleChange}
+                    ></input>
+                    <input
+                      className="shipping-input  m-3"
+                      required
+                      type="text"
+                      placeholder="Town/City"
+                      name="city"
+                      value={orderDetails.city}
+                      onChange={handleChange}
+                    ></input>
+                    <input
+                      className="shipping-input  m-3"
+                      required
+                      type="text"
+                      placeholder="State"
+                      name="state"
+                      value={orderDetails.state}
+                      onChange={handleChange}
+                    ></input>
+                  </div>
+                </Col>
+                <Col md={5}>
+                  <h1 className=" mb-5 checkout-heading">Payment Option</h1>
+                  <div className="text-center">
+                    <h2 className="mb-5">Your Total : $ {total}</h2>
+                    <button className="checkout-btn " onClick={handleCheckOut}>
+                      Proceed with Cash on Delivery
+                    </button>
+                    <p>or</p>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          )}
 
           <Footer />
         </>
