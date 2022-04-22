@@ -1,8 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Source+Sans+Pro:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=IBM+Plex+Sans+Thai+Looped:wght@200&family=Josefin+Sans:wght@300&family=Zen+Kaku+Gothic+Antique&display=swap");
 
 html {
   font-size: 10px;
+}
+
+:root {
+  --dark: rgb(53, 53, 53);
+  --light: #eeeeee;
+  --primary: tomato;
+  --color1: #222831;
+  --color2: #393e46;
+  --color3: #00adb5;
 }
 
 body {
@@ -13,11 +21,71 @@ body {
   box-sizing: border-box;
 }
 
-:root {
-  --dark: rgb(53, 53, 53);
-  --light: #eeeeee;
-  --primary: tomato;
-  --color1: #222831;
-  --color2: #393e46;
-  --color3: #00adb5;
+.btn-close {
+  width: 25px !important;
+  height: 6px !important;
+  padding: 14px !important;
+  color: #ffffff !important;
+}
+
+.btn-close:hover {
+  outline: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.alert-container {
+  padding: 0px 10px 10px;
+}
+
+.alert {
+  height: 40px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-transform: capitalize;
+}
+
+.alert-success {
+  color: black !important;
+  background-color: #5ba1687d !important;
+  border-color: #badbcc !important;
+}
+
+.text-underline {
+  position: relative;
+  transition: all 0.5s ease-in-out;
+}
+
+.text-underline:hover {
+  color: var(--primary) !important;
+}
+
+.text-underline::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  top: 115%;
+  left: 25%;
+  background-color: white;
+  height: 7%;
+  transition: all 0.5s ease-in-out;
+}
+
+.text-underline:hover::before {
+  width: 100%;
+  left: 0%;
+  background-color: var(--primary);
+}
+
+.styled-font {
+  font-family: "Dancing Script", cursive;
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.text-orange {
+  color: var(--primary);
 }

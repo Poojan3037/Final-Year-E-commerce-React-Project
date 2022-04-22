@@ -15,17 +15,6 @@ function Product(props) {
 
   const navigate = useNavigate();
 
-  AOS.init({
-    // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
-    offset: 150, // offset (in px) from the original trigger point
-    delay: 200, // values from 0 to 3000, with step 50ms
-    duration: 1000, // values from 0 to 3000, with step 50ms
-    easing: "ease-in-out", // default easing for AOS animations
-    once: false, // whether animation should happen only once - while scrolling down
-    mirror: false, // whether elements should animate out while scrolling past them
-    anchorPlacement: "top-bottom", // defines which position of the element regarding to window should trigger
-  });
-
   const openShowProduct = () => {
     navigate("/productDetails");
     dispatch(productSliceAction.setSingleProductDetails(props.product));
@@ -33,9 +22,11 @@ function Product(props) {
 
   return (
     <>
-      <Col md={3} data-aos="fade-up">
-        <Card className="text-center product-card">
-          <Card.Img variant="top" src={img} className="product-img" />
+      <Col md={6} xl={3} data-aos="fade-up" className="mt-5 mx-5">
+        <Card className="text-center product-card shadow-lg rounded-5">
+          <div className="product-img-container p-5">
+            <Card.Img variant="top" src={img} className="product-img" />
+          </div>
           <Card.Body>
             <Card.Title>
               <h5>{title}</h5>
@@ -49,8 +40,8 @@ function Product(props) {
               readOnly
             />
             <h1 className="price-text">$ {price}</h1>
-            <button className="product-btn" onClick={openShowProduct}>
-              Add To Cart
+            <button className="product-btn p-1" onClick={openShowProduct}>
+              <i className="bi bi-cart3 cart-icon"></i> Add To Cart
             </button>
           </Card.Body>
         </Card>

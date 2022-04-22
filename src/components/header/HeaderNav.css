@@ -21,7 +21,6 @@
 }
 
 .responsive-header {
-  padding: 5px;
   background-color: var(--light);
 }
 
@@ -52,7 +51,7 @@
   }
 }
 
-@media screen and (max-width: 756px) and (min-width: 300px) {
+@media screen and (max-width: 768px) and (min-width: 300px) {
   .header-nav {
     display: none;
   }

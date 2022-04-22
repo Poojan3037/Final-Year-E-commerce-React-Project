@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Col, Container, Row, Alert } from "react-bootstrap";
+import { Col, Container, Row, Alert, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../components/Footer/Footer";
 import HeaderFooter from "../components/header/HeaderFooter";
@@ -104,10 +104,13 @@ function ProductDetails() {
       <HeaderSearch />
       <HeaderFooter />
 
-      <Container className="m-5 p-5">
+      <Container className=" p-5 product-deatils-container shadow-lg">
         <Row className="justify-content-evenly ">
           <Col className="left-product-detail mt-5 text-center" md={4}>
-            <img src={product.img} className="img-fluid"></img>
+            <img
+              src={product.img}
+              className="img-fluid produt-details-img"
+            ></img>
           </Col>
           <Col className="right-product-detail mt-5" md={7}>
             <div className="right-product-detail-highlight-container">
@@ -130,21 +133,22 @@ function ProductDetails() {
               />
             </h3>
             {product.size.length > 1 && <h3>Size</h3>}
-            <div className="radio-container">
-              {product.size.length > 1 &&
-                product.size.map((item, index) => {
-                  return (
-                    <div key={index} className="radio">
-                      <label>{item}</label>
-                      <input
-                        type="radio"
-                        name="size"
-                        value={item}
-                        onClick={() => setSelectedSize(item)}
-                      />
-                    </div>
-                  );
-                })}
+            <div className="radio-container my-4">
+              {product.size.length > 1 && (
+                <select
+                  className="select"
+                  size="lg"
+                  onChange={(e) => setSelectedColor(e.target.value)}
+                >
+                  {product.size.map((item, index) => {
+                    return (
+                      <option key={index} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
+              )}
             </div>
             <h3>Colour</h3>
             <div className="radio-container">
@@ -152,12 +156,16 @@ function ProductDetails() {
                 return (
                   <div key={index} className="radio">
                     <label>{item}</label>
-                    <input
-                      type="radio"
-                      name="color"
-                      value={item}
+
+                    <div
+                      className={`color-box ${
+                        selectedColor === item
+                          ? "active-color-box"
+                          : "color-box"
+                      }`}
+                      style={{ backgroundColor: item }}
                       onClick={() => setSelectedColor(item)}
-                    />
+                    ></div>
                   </div>
                 );
               })}

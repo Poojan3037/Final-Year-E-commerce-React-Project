@@ -49,34 +49,71 @@ function OffCanvasExample({ name, ...props }) {
             </div>
             <div className="sidebar-menu">
               <h1>Menu Items</h1>
-              <NavLink to="/" className="link2">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "active-link2" : "link2"
+                }
+              >
                 Home
               </NavLink>
-              <NavLink to="/" className="link2">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "active-link2" : "link2"
+                }
+              >
                 About us
               </NavLink>
-              <NavLink to="/" className="link2">
-                contact us
-              </NavLink>
-              <NavLink to="/yourorder" className="link2">
+              <NavLink
+                to="/yourorder"
+                className={({ isActive }) =>
+                  isActive ? "active-link2" : "link2"
+                }
+              >
                 Your Orders
               </NavLink>
             </div>
             <div className="sidebar-categories">
               <h1>categories</h1>
-              <NavLink to="/men" className="link2">
+              <NavLink
+                to="/men"
+                className={({ isActive }) =>
+                  isActive ? "active-link2" : "link2"
+                }
+              >
                 Men
               </NavLink>
-              <NavLink to="/women" className="link2">
+              <NavLink
+                to="/women"
+                className={({ isActive }) =>
+                  isActive ? "active-link2" : "link2"
+                }
+              >
                 Women
               </NavLink>
-              <NavLink to="/clothes" className="link2">
+              <NavLink
+                to="/clothes"
+                className={({ isActive }) =>
+                  isActive ? "active-link2" : "link2"
+                }
+              >
                 Clothes
               </NavLink>
-              <NavLink to="/watch" className="link2">
+              <NavLink
+                to="/watch"
+                className={({ isActive }) =>
+                  isActive ? "active-link2" : "link2"
+                }
+              >
                 Watch
               </NavLink>
-              <NavLink to="/shoes" className="link2">
+              <NavLink
+                to="/shoes"
+                className={({ isActive }) =>
+                  isActive ? "active-link2" : "link2"
+                }
+              >
                 Shoes
               </NavLink>
             </div>
@@ -88,13 +125,18 @@ function OffCanvasExample({ name, ...props }) {
               </NavLink>
 
               {!user && (
-                <NavLink to="/login" className="link2">
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive ? "active-link2" : "link2"
+                  }
+                >
                   Login
                 </NavLink>
               )}
 
               {user && (
-                <button onClick={handleLogout} className="header-btn">
+                <button onClick={handleLogout} className="header-btn mt-2">
                   Logout
                 </button>
               )}

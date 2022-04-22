@@ -5,19 +5,17 @@ import "./Main.css";
 import { useSelector } from "react-redux";
 
 function Main() {
-  const products = useSelector((state) => state.products.products);
+  const products = useSelector((state) => state.products.copyProducts);
 
   return (
     <>
-      <Container fluid>
-        <Row className="justify-content-center align-items-center product-heading">
-          <Col md={4} className="text-center">
-            <h2>Featured Products</h2>
+      <Container className="main-container shadow-lg  ">
+        <Row className="justify-content-center align-items-center product-heading mt-4">
+          <Col md={4} className="text-center p-3">
+            <h1 className="styled-font text-orange ">Featured Products</h1>
           </Col>
         </Row>
-      </Container>
-      <Container className="main-container">
-        <Row>
+        <Row className="justify-content-evenly">
           {products.length > 0 &&
             products.map((item) => {
               return <Product key={item.id} product={item} />;

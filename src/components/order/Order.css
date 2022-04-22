@@ -1,9 +1,6 @@
 .order-container {
-  border: 1px solid rgb(206, 206, 206);
-}
-
-.order-container:hover {
-  box-shadow: 0px 0px 20px 0px var(--dark);
+  background-color: var(--dark);
+  color: var(--light);
 }
 
 .order-container > p {
@@ -12,4 +9,23 @@
 
 .order > p {
   margin: 2px 0px;
+}
+
+.text-primary-custom {
+  color: var(--primary) !important;
+  font-weight: 500;
+}
+
+.order-img {
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.order-icon {
+  color: var(--primary);
+}
+
+.payment-icon {
+  width: 40px;
+  color: var(--primary) !important;
 }

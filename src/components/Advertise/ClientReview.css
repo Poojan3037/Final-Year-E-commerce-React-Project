@@ -1,0 +1,16 @@
+.client-review-container {
+  background: url("../../../public/cleint-bg.jpg");
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.client-review {
+  border: 1px solid white;
+}
+
+@media screen and (max-width: 1224px) {
+  .client-review-container {
+    height: auto;
+  }
+}

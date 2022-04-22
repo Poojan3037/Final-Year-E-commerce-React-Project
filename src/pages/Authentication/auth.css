@@ -92,6 +92,11 @@
   color: var(--light);
 }
 
+.error {
+  color: rgba(255, 0, 0, 0.747);
+  font-weight: 700;
+}
+
 @media screen and (max-width: 890px) {
   .auth-container {
     height: auto;

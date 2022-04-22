@@ -50,3 +50,45 @@ p {
 .remove-p:hover {
   color: var(--dark);
 }
+
+.black-text-underline {
+  position: relative;
+  transition: all 0.5s ease-in-out;
+}
+
+.black-text-underline:hover {
+  color: var(--dark);
+}
+
+.black-text-underline::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  top: 125%;
+  left: 25%;
+  background-color: var(--primary);
+  height: 7%;
+  transition: all 0.5s ease-in-out;
+}
+
+.black-text-underline:hover::before {
+  width: 100%;
+  left: 0%;
+  background-color: var(--dark);
+}
+
+.shop-btn {
+  width: 70%;
+  height: 35px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  color: var(--light);
+  transition: all 0.4s ease-in-out;
+  font-size: 1.7rem !important;
+  background-color: var(--primary);
+}
+
+.shop-btn:hover {
+  background-color: var(--dark);
+}

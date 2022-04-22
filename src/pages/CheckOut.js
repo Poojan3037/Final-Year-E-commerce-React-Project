@@ -11,6 +11,7 @@ import HeaderSearch from "../components/header/HeaderSearch";
 import { db } from "../firebaseConfig";
 import { cartSliceAction } from "../slices/CartSlice";
 import "./CheckOut.css";
+import StripeCheckout from "react-stripe-checkout";
 
 const CheckOut = () => {
   const total = useSelector((state) => state.cart.total);
@@ -20,6 +21,7 @@ const CheckOut = () => {
   const dispatch = useDispatch();
 
   const [complete, setComplete] = useState(false);
+  const [error, setError] = useState(false);
 
   const [orderDetails, setOrderDetails] = useState({
     name: "",
@@ -42,36 +44,60 @@ const CheckOut = () => {
     });
   };
 
-  const handleCheckOut = async () => {
+  const handleCheckOut = async (token, e) => {
     let date = new Date().toDateString();
     let time = new Date().toTimeString();
 
-    let obj = {
-      name: orderDetails.name,
-      number: orderDetails.number,
-      house: orderDetails.house,
-      area: orderDetails.area,
-      landmark: orderDetails.landmark,
-      pincode: orderDetails.pincode,
-      state: orderDetails.state,
-      city: orderDetails.city,
+    let paymentMethod;
+    if (token === "card") {
+      paymentMethod = "card";
+    } else {
+      paymentMethod = "cash on delivery";
+    }
 
-      userId: user.uid,
-      userEmail: user.email,
+    console.log(paymentMethod);
 
-      orderList: cart,
-      total: total,
-      orderDate: date,
-      orderTime: time,
-    };
+    if (
+      orderDetails.name.length > 3 &&
+      orderDetails.number &&
+      orderDetails.house &&
+      orderDetails.area &&
+      orderDetails.landmark &&
+      orderDetails.pincode &&
+      orderDetails.state &&
+      orderDetails.city
+    ) {
+      let obj = {
+        name: orderDetails.name,
+        number: orderDetails.number,
+        house: orderDetails.house,
+        area: orderDetails.area,
+        landmark: orderDetails.landmark,
+        pincode: orderDetails.pincode,
+        state: orderDetails.state,
+        city: orderDetails.city,
 
-    const docRef = collection(db, "orders");
-    await addDoc(docRef, obj);
+        userId: user.uid,
+        userEmail: user.email,
 
-    dispatch(cartSliceAction.clearCart());
-    dispatch(cartSliceAction.updateTotal());
+        orderList: cart,
+        total: total,
+        orderDate: date,
+        orderTime: time,
+        paymentMethod,
+      };
 
-    setComplete(true);
+      const docRef = collection(db, "orders");
+      await addDoc(docRef, obj);
+
+      dispatch(cartSliceAction.clearCart());
+      dispatch(cartSliceAction.updateTotal());
+
+      setComplete(true);
+      setError("");
+    } else {
+      setError("Please Fill All Details");
+    }
   };
 
   return (
@@ -86,9 +112,9 @@ const CheckOut = () => {
             <Complete />
           ) : (
             <Container className="p-5">
-              <Row className="justify-content-between">
-                <Col md={5}>
-                  <h1 className=" mb-5 checkout-heading">
+              <Row className="justify-content-evenly">
+                <Col md={5} className="bg-light shadow-lg p-5">
+                  <h1 className=" mb-5 checkout-heading styled-font">
                     Shipping Information
                   </h1>
 
@@ -110,6 +136,7 @@ const CheckOut = () => {
                       name="number"
                       value={orderDetails.number}
                       onChange={handleChange}
+                      maxLength="10"
                     ></input>
 
                     <input
@@ -147,6 +174,7 @@ const CheckOut = () => {
                       name="pincode"
                       value={orderDetails.pincode}
                       onChange={handleChange}
+                      maxLength="10"
                     ></input>
                     <input
                       className="shipping-input  m-3"
@@ -166,16 +194,36 @@ const CheckOut = () => {
                       value={orderDetails.state}
                       onChange={handleChange}
                     ></input>
+                    {error && (
+                      <p className="error">
+                        <i className="bi bi-exclamation-circle-fill me-2"></i>
+                        {error}
+                      </p>
+                    )}
                   </div>
                 </Col>
-                <Col md={5}>
-                  <h1 className=" mb-5 checkout-heading">Payment Option</h1>
+                <Col md={5} className="bg-light shadow-lg p-5">
+                  <h1 className=" mb-5 checkout-heading styled-font">
+                    Payment Option
+                  </h1>
                   <div className="text-center">
                     <h2 className="mb-5">Your Total : $ {total}</h2>
-                    <button className="checkout-btn " onClick={handleCheckOut}>
+                    <button
+                      className="checkout-btn "
+                      onClick={() => handleCheckOut("cash")}
+                    >
                       Proceed with Cash on Delivery
                     </button>
-                    <p>or</p>
+                    <p className="my-3 text-orange ">or</p>
+                    <StripeCheckout
+                      stripeKey="pk_test_51KqFeASD3AUWv2xurY1A0I1QqqNG1RJ8pkjTbphrFYkORkuGNOFLOPTiyFnv3AGcZHH6wY5A6YtOPzX8fpmqHE2V00t1wflrgy"
+                      billingAddress
+                      amount={Number(total) * 100}
+                      token={() => handleCheckOut("card")}
+                      label="Proceed with Online Payment"
+                      className="checkout-btn"
+                      currency="INR"
+                    />
                   </div>
                 </Col>
               </Row>

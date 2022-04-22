@@ -108,11 +108,15 @@ const Login = () => {
               className="auth-input"
             />
 
+            {error && (
+              <p className="error">
+                <i className="bi bi-exclamation-circle-fill me-2"></i>
+                {error}
+              </p>
+            )}
             <button className="auth-btn" onClick={handleSubmit}>
               Log in
             </button>
-
-            <p>{error}</p>
 
             <h2 className="text-center m-5">or</h2>
 

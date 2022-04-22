@@ -31,20 +31,22 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/men" element={<Men />} />
-        <Route path="/women" element={<Women />} />
-        <Route path="/clothes" element={<Clothes />} />
-        <Route path="/watch" element={<Watch />} />
-        <Route path="/shoes" element={<Shoes />} />
-        <Route path="/productDetails" element={<ProductDetails />} />
-        <Route path="/shoppingCart" element={<ShoppingCart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/checkout" element={<CheckOut />} />
-        <Route path="yourorder" element={<YourOrders />} />
-      </Routes>
+      <div className="main">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/men" element={<Men />} />
+          <Route path="/women" element={<Women />} />
+          <Route path="/clothes" element={<Clothes />} />
+          <Route path="/watch" element={<Watch />} />
+          <Route path="/shoes" element={<Shoes />} />
+          <Route path="/productDetails" element={<ProductDetails />} />
+          <Route path="/shoppingCart" element={<ShoppingCart />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/checkout" element={<CheckOut />} />
+          <Route path="yourorder" element={<YourOrders />} />
+        </Routes>
+      </div>
     </>
   );
 }

@@ -114,11 +114,16 @@ const SignUp = () => {
               className="auth-input"
             />
 
+            {error && (
+              <p className="error">
+                <i className="bi bi-exclamation-circle-fill me-2"></i>
+                {error}
+              </p>
+            )}
+
             <button className="auth-btn" onClick={handleSubmit}>
               Register
             </button>
-
-            <p>{error}</p>
           </Col>
         </Row>
       </Container>

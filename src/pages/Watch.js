@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Col, Container, Nav, NavLink, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Col, Container, Form, Nav, NavLink, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../components/Footer/Footer";
 import HeaderFooter from "../components/header/HeaderFooter";
@@ -11,20 +11,25 @@ import "./common.css";
 
 function Watch() {
   const dispatch = useDispatch();
+  const [activeBtn, setActiveBtn] = useState("All Products");
+  const [rangeValue, setRangeValue] = useState(3000);
 
   const products = useSelector((state) => state.products.copyProducts);
   const loading = useSelector((state) => state.products.loading);
 
   const getAllProducts = () => {
     dispatch(productSliceAction.getAllWatch());
+    setActiveBtn("All Products");
   };
 
   const getMenWatch = () => {
     dispatch(productSliceAction.getMenWatch());
+    setActiveBtn("Men");
   };
 
   const getWomenWatch = () => {
     dispatch(productSliceAction.getWomenWatch());
+    setActiveBtn("Women");
   };
 
   useEffect(() => {
@@ -38,35 +43,64 @@ function Watch() {
       <HeaderSearch />
       <HeaderFooter />
 
-      <Container fluid>
-        <Row className="justify-content-center align-items-center product-heading my-4">
+      <Container className="main-container p-5 shadow-lg">
+        <Row className="justify-content-center align-items-center product-heading mt-4">
           <Col md={4} className="text-center">
-            <h2>Watch</h2>
+            <h1 className="styled-font text-orange ">Watch</h1>
           </Col>
         </Row>
-      </Container>
-
-      <Container className="main-container">
         <Row className="justify-content-evenly">
-          <Col className="sidebar" md={2}>
-            <button className="sidebar-btn" onClick={getAllProducts}>
+          <Col className="sidebar" md={4} sm={6} xl={2}>
+            <p className="mt-3 mb-0">Price Range : ₹0 - ₹{rangeValue}</p>
+            <Form.Range
+              min="40"
+              max="3000"
+              step="10"
+              value={rangeValue}
+              className="range-input"
+              onChange={(e) => setRangeValue(e.target.value)}
+            />
+            <button
+              className={
+                activeBtn === "All Products"
+                  ? "active-sidebar-btn"
+                  : "sidebar-btn"
+              }
+              onClick={getAllProducts}
+            >
               All Products
             </button>
-            <button className="sidebar-btn" onClick={getMenWatch}>
+            <button
+              className={
+                activeBtn === "Men" ? "active-sidebar-btn" : "sidebar-btn"
+              }
+              onClick={getMenWatch}
+            >
               Men
             </button>
-            <button className="sidebar-btn" onClick={getWomenWatch}>
+            <button
+              className={
+                activeBtn === "Women" ? "active-sidebar-btn" : "sidebar-btn"
+              }
+              onClick={getWomenWatch}
+            >
               Women
             </button>
           </Col>
           <Col md={10}>
             {loading && <h1>....Loading....</h1>}
             {!loading && (
-              <Row>
+              <Row className="justify-content-evenly">
                 {products.length > 0 &&
-                  products.map((item) => {
-                    return <Product key={item.id} product={item} />;
-                  })}
+                  products
+                    .filter((item) => {
+                      if (parseInt(item.price) <= rangeValue) {
+                        return item;
+                      }
+                    })
+                    .map((item) => {
+                      return <Product key={item.id} product={item} />;
+                    })}
               </Row>
             )}
           </Col>

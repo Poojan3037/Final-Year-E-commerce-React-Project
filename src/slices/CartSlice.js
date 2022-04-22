@@ -9,7 +9,6 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       const product = state.cart.filter((item) => {
-        console.log(action.payload.id, item.id);
         if (action.payload.id === item.id) {
           return action.payload;
         }

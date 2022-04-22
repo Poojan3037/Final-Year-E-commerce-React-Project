@@ -17,41 +17,60 @@ const Order = (props) => {
     state,
     total,
     orderTime,
+    paymentMethod,
   } = props.item;
 
   return (
     <>
-      <Col md={12} className="order-container p-5 my-5">
-        <h5>Your Order Placed On {orderDate}</h5>
-        <p>{name}</p>
-        <p>{house},</p>
-        <p>{area},</p>
-        <p>{landmark},</p>
+      <Col md={5} className="order-container p-5 m-5 shadow-lg rounded">
+        <h5>
+          <i className="bi bi-calendar-check me-3 order-icon"></i>
+          Your Order Placed On {orderDate}
+        </h5>
         <p>
-          {city},{state}-{pincode}
+          {" "}
+          <i className="bi bi-house-door-fill me-3 order-icon"></i>
+          {house} , {area} , {landmark} , {city} , {state}-{pincode}
         </p>
-        <p>Mob No.-{number}</p>
-
-        <Row className=" mt-5 p-3">
+        <p>
+          <i className="bi bi-telephone-fill me-3 order-icon"></i> {number}
+        </p>
+        <Row className=" mt-5 p-3 justify-content-between">
           {orderList.map((item) => {
             return (
-              <Col key={item.id} md={5} className="order">
-                <Row>
-                  <Col md={4}>
-                    <img src={item.img} height="150" width="100" />
-                  </Col>
-                  <Col md={6}>
-                    <h4>{item.title}</h4>
-                    <p className="m-0">Color : {item.color}</p>
-                    {item.size && <p className="m-0">Size : {item.size}</p>}
-                    <p className="m-0">Price : $ {item.price}</p>
-                    <p className="m-0">Quantity : {item.quantity}</p>
-                  </Col>
-                </Row>
+              <Col key={item.id} md={6} className="order">
+                <img
+                  src={item.img}
+                  height="70"
+                  width="70"
+                  className="order-img"
+                />
+                <h4>{item.title}</h4>
+                <p className="m-0">
+                  <spna className="text-primary-custom">Color :</spna>{" "}
+                  {item.color}
+                </p>
+                {item.size && (
+                  <p className="m-0">
+                    <span className="text-primary-custom">Size :</span>{" "}
+                    {item.size}
+                  </p>
+                )}
+                <p className="m-0 text-primary-custom">x {item.quantity}</p>
+                <p className="m-0">
+                  <span className="text-primary-custom">Price :</span> ${" "}
+                  {item.price}
+                </p>
               </Col>
             );
           })}
         </Row>
+        <div className="d-flex align-items-center">
+          <img src="money.png" className="payment-icon me-1" />
+          <p className="m-0 mt-2 text-capitalize  text-center text-primary-custom">
+            Payment with {paymentMethod}
+          </p>
+        </div>
       </Col>
     </>
   );

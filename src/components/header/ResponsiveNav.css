@@ -85,3 +85,18 @@
   border-bottom: 2px solid var(--dark);
   margin: 20px 0px;
 }
+
+.active-link2 {
+  color: var(--primary);
+  font-size: 1.4rem;
+  text-decoration: none;
+  box-sizing: border-box;
+  margin: 0px 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.active-link2:hover {
+  color: var(--primary);
+}

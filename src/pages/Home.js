@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { productSliceAction } from "../slices/productSlice";
 import Footer from "../components/Footer/Footer";
 import Loading from "../components/Loading/Loading";
+import Hero from "../components/Advertise/Hero";
+import ClientReviews from "../components/Advertise/ClientReviews";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -45,11 +47,14 @@ const Home = () => {
       <HeaderFooter />
 
       {/* Advertise */}
+      <Hero />
       <Advertise />
 
       {/* Main Products */}
       {loading && <Loading />}
       {!loading && <Main />}
+
+      <ClientReviews />
 
       <Footer />
     </>
