@@ -43,10 +43,10 @@ function Shoes() {
       <HeaderSearch />
       <HeaderFooter />
 
-      <Container className="main-container p-5 shadow-lg">
+      <Container className="main-container p-5 shadow-lg bg-light">
         <Row className="justify-content-center align-items-center product-heading mt-4">
           <Col md={4} className="text-center">
-            <h1 className="styled-font text-orange ">Shoes</h1>
+            <h1 className="text-center mt-4 black-text-underline d-inline styled-font text-orange ">Shoes</h1>
           </Col>
         </Row>
         <Row className="justify-content-evenly">

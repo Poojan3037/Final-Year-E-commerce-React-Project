@@ -73,7 +73,7 @@ function ProductDetails() {
       });
 
       setReviewItems(firestoreArrayData);
-    } catch (err) {}
+    } catch (err) { }
   };
 
   const addReview = async () => {
@@ -104,7 +104,7 @@ function ProductDetails() {
       <HeaderSearch />
       <HeaderFooter />
 
-      <Container className=" p-5 product-deatils-container shadow-lg">
+      <Container className=" p-5 product-deatils-container shadow-lg bg-light">
         <Row className="justify-content-evenly ">
           <Col className="left-product-detail mt-5 text-center" md={4}>
             <img
@@ -122,7 +122,7 @@ function ProductDetails() {
               </h4>
             </div>
             <h1>{product.title}</h1>
-            <h2>Price : ${product.price}</h2>
+            <h2>Price : ₹{product.price}</h2>
             <h3>
               <Rating
                 name="half-rating"
@@ -158,11 +158,10 @@ function ProductDetails() {
                     <label>{item}</label>
 
                     <div
-                      className={`color-box ${
-                        selectedColor === item
-                          ? "active-color-box"
-                          : "color-box"
-                      }`}
+                      className={`color-box ${selectedColor === item
+                        ? "active-color-box"
+                        : "color-box"
+                        }`}
                       style={{ backgroundColor: item }}
                       onClick={() => setSelectedColor(item)}
                     ></div>

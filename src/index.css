@@ -19,6 +19,11 @@ body {
   font-family: "Roboto", sans-serif;
   font-family: "Source Sans Pro", sans-serif;
   box-sizing: border-box;
+
+}
+
+.main {
+  background-color: var(--light);
 }
 
 .btn-close {

@@ -53,7 +53,7 @@ function ShoppingCart() {
       <HeaderFooter />
 
       <Container>
-        <Row className="justify-content-center shadow-lg">
+        <Row className="justify-content-center shadow-lg bg-light">
           <div className="text-center p-5">
             <h1 className="text-center mt-4 black-text-underline d-inline styled-font text-orange">
               Shopping Cart
@@ -78,12 +78,12 @@ function ShoppingCart() {
             </Col>
           ) : (
             <>
-              <Col md={8} className="shadow p-5 my-5 bg-light ">
+              <Col md={8} className="shadow p-5 my-5 shopping-cart ">
                 {cartItems.map((item) => {
                   return (
                     <Row
                       key={item.id}
-                      className="justify-content-evenly mt-5 p-3 border-bottom"
+                      className="justify-content-evenly mt-5 p-3 shopping-item"
                     >
                       <Col md={5}>
                         <Row>
@@ -107,7 +107,7 @@ function ShoppingCart() {
                         </Row>
                       </Col>
                       <Col md={2} className="text-center">
-                        <p>$ {item.totalPriceOfProduct}</p>
+                        <p>₹ {item.totalPriceOfProduct}</p>
                       </Col>
                       <Col md={3} className="text-center">
                         <Row>
@@ -136,14 +136,14 @@ function ShoppingCart() {
                   );
                 })}
               </Col>
-              <Col md={3} className="text-center m-5 shadow p-5 bg-light">
+              <Col md={3} className="text-center m-5 shadow p-5 shopping-cart">
                 <h2>Order Summary</h2>
                 <Row>
                   <Col md={6} className="text-center my-5">
                     <h3>Total</h3>
                   </Col>
                   <Col md={6} className="text-center my-5">
-                    <h3>$ {total}</h3>
+                    <h3>₹ {total}</h3>
                   </Col>
                 </Row>
                 {total > 0 && (

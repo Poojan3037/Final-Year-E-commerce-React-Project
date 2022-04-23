@@ -113,12 +113,12 @@ const CheckOut = () => {
           ) : (
             <Container className="p-5">
               <Row className="justify-content-evenly">
-                <Col md={5} className="bg-light shadow-lg p-5">
-                  <h1 className=" mb-5 checkout-heading styled-font">
+                <Col md={5} className="bg-light shadow-lg p-5 text-center">
+                  <h1 className=" text-center my-5 black-text-underline d-inline styled-font text-orange">
                     Shipping Information
                   </h1>
 
-                  <div className="text-center">
+                  <div className="text-center mt-5">
                     <input
                       className="shipping-input m-3"
                       required
@@ -202,12 +202,12 @@ const CheckOut = () => {
                     )}
                   </div>
                 </Col>
-                <Col md={5} className="bg-light shadow-lg p-5">
-                  <h1 className=" mb-5 checkout-heading styled-font">
+                <Col md={5} className="bg-light shadow-lg p-5 text-center">
+                  <h1 className="text-center  mb-5 black-text-underline d-inline styled-font text-orange">
                     Payment Option
                   </h1>
-                  <div className="text-center">
-                    <h2 className="mb-5">Your Total : $ {total}</h2>
+                  <div className="text-center mt-5">
+                    <h2 className="mb-5">Your Total: ₹ {total}</h2>
                     <button
                       className="checkout-btn "
                       onClick={() => handleCheckOut("cash")}

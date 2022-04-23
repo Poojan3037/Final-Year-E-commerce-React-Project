@@ -39,7 +39,7 @@ function Product(props) {
               className="ratings"
               readOnly
             />
-            <h1 className="price-text">$ {price}</h1>
+            <h1 className="price-text">₹ {price}</h1>
             <button className="product-btn p-1" onClick={openShowProduct}>
               <i className="bi bi-cart3 cart-icon"></i> Add To Cart
             </button>

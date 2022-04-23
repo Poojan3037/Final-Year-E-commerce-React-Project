@@ -57,7 +57,7 @@ const YourOrders = () => {
       <HeaderSearch />
       <HeaderFooter />
 
-      <Container className="shadow-lg">
+      <Container className="shadow-lg bg-light">
         <div className="text-center p-5">
           <h1 className="text-center mt-4 black-text-underline d-inline styled-font text-orange">
             Your Orders

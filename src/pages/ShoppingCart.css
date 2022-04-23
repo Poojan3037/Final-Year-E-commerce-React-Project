@@ -1,3 +1,8 @@
+.shopping-cart {
+  background-color: var(--light);
+}
+
+
 .cart-heading {
   padding: 10px 0px;
   border-bottom: 2px solid;
@@ -91,4 +96,8 @@ p {
 
 .shop-btn:hover {
   background-color: var(--dark);
+}
+
+.shopping-item {
+  border-bottom: 1px solid rgb(202, 202, 202);
 }

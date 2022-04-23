@@ -58,7 +58,7 @@ const Order = (props) => {
                 )}
                 <p className="m-0 text-primary-custom">x {item.quantity}</p>
                 <p className="m-0">
-                  <span className="text-primary-custom">Price :</span> ${" "}
+                  <span className="text-primary-custom">Price :</span> ₹{" "}
                   {item.price}
                 </p>
               </Col>

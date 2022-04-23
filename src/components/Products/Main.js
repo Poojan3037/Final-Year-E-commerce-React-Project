@@ -9,7 +9,7 @@ function Main() {
 
   return (
     <>
-      <Container className="main-container shadow-lg  ">
+      <Container className="main-container shadow-lg  bg-light">
         <Row className="justify-content-center align-items-center product-heading mt-4">
           <Col md={4} className="text-center p-3">
             <h1 className="styled-font text-orange ">Featured Products</h1>
